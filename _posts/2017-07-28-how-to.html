@@ -1,0 +1,152 @@
+---
+layout: post
+title: "How to Use Google Spreadsheets and GitHub to Manage Data (Journalism) Projects"
+date: 2017-07-28 16:00:00 +0000
+tags:
+image: https://s3.amazonaws.com/hackedu/2017-07-28-cards.jpg
+imagecredits: https://www.flickr.com/photos/andylangager/9368801248
+---
+<p>As part of the research for my Spencer Fellowship, I&#8217;m trying to track as many of the financial, political, and social networks in ed-tech as I can. (I&#8217;m casting the net wide at first, but my project will surely narrow as I progress.) </p>
+
+<p>I&#8217;m using a variety of digital tools to do this, but relying heavily on GitHub Pages (which I already use to manage all my websites and projects) and Google Spreadsheets. This walkthrough is as much to remind me how this process works as it is to help others.</p>
+
+<h3>What You&#8217;ll Need</h3>
+<br />
+<ul>
+<li><a href="http://github.com">a GitHub account</a></li>
+<li><a href="https://desktop.github.com/">the desktop version of GitHub</a></li>
+<li><a href="http://drive.google.com">a Google account</a></li>
+<li>a text editor (I use <a href="https://www.sublimetext.com/">Sublime Text</a>; also recommended: <a href="https://www.sublimetext.com/">Atom</a>, which is built by GitHub)</li>
+</ul>
+
+<h3>Step 1: Create a GitHub repository</h3>
+<br />
+
+<p><img src="https://s3.amazonaws.com/hackedu/2017-07-28-howto1.png"></p>
+
+<p>I&#8217;ve created a repo to track data about the Emerson Collective, a venture philanthropy firm founded by Laurene Powell Jobs, Steve Jobs&#8217; widow.</p>
+
+<p>When you create a repository, you can choose the license. I always add a README to my repository.</p>
+
+<p><img src="https://s3.amazonaws.com/hackedu/2017-07-28-howto2.png"></p>
+
+<h3>Step 2: Add GitHub Pages to the repository</h3>
+<br />
+<p>Go to Settings</p>
+
+<p><img src="https://s3.amazonaws.com/hackedu/2017-07-28-howto3.png"></p>
+
+<p>Scroll down to the GitHub Pages settings. Change the Source to &#8220;Master&#8221; and hit &#8220;Save.&#8221; </p>
+
+<p><img src="https://s3.amazonaws.com/hackedu/2017-07-28-howto4.png"></p>
+
+<p>Then choose your theme. Yes, they&#8217;re all ugly.</p>
+
+<p><img src="https://s3.amazonaws.com/hackedu/2017-07-28-howto5.png"></p>
+
+<p>The addition of a theme is going to overwrite anything you put in the README file. So you can update this and then &#8220;Commit changes.&#8221;</p>
+
+<p><img src="https://s3.amazonaws.com/hackedu/2017-07-28-howto6.png"></p>
+
+<h3>Step 3: Move the files from the repo to your desktop</h3>
+<br />
+<p>There are several ways in which you can make &#8220;commits&#8221; to GitHub &#8211; through the browser, through the command line, through the company&#8217;s desktop app. I use the latter. </p>
+
+<p>There are also several ways that you can get a copy of the files in a repository from GitHub onto your local machine. You can download a copy from within each repository. Or you can use the desktop app to clone the repo locally.</p>
+
+<p><img src="https://s3.amazonaws.com/hackedu/2017-07-28-howto7.png"></p>
+
+<p>The folder on your computer will contain two files: _config.yml and README.md.</p>
+
+<p><img src="https://s3.amazonaws.com/hackedu/2017-07-28-howto8.png"></p>
+
+<h3>Step 4: Create a Google Spreadsheet</h3>
+<br />
+<p>The Google Spreadsheet is going to work as the database, of sorts, for this project. All updates to the data will take place in the spreadsheet, and through a couple of pieces of code, the GitHub repository will then be updated. (This can be <a href="https://www.easycron.com/">scheduled to happen programmatically</a>, or you can just do this manually. I do the latter.)</p>
+
+<p>Each tab in your spreadsheet will be used to create a YAML file &#8211; a human-readable data file. I recommend lower case names for the tabs. Use hyphens if you want the name to be more than one word. The top row in each tab will dictate the data structure.</p>
+
+<p>As you can see, my Emerson Collective work will look at people:</p>
+
+<p><img src="https://s3.amazonaws.com/hackedu/2017-07-28-howto9.png"></p>
+
+<p>&#8230;And investments:</p>
+
+<p><img src="https://s3.amazonaws.com/hackedu/2017-07-28-howto10.png"></p>
+
+<h3>Step 5: Make the spreadsheet public</h3>
+<br />
+
+<p>Under File, choose to "Publish on the Web."</p>
+
+<p>This won&#8217;t allow anyone else to edit the document. But it will provide a JSON representation of its contents, which means <a href="https://apievangelist.com/2017/07/11/when-you-publish-a-google-sheet-to-the-web-it-als-becomes-an-api/">you can program against it</a>.</p>
+
+<p><img src="https://s3.amazonaws.com/hackedu/2017-07-28-howto11.png"></p>
+
+<p>Google gives you the link to your spreadsheet. Copy that down somewhere. If you look at the URL in your browser, you can readily see what you need to know: there&#8217;s lengthy string of characters after docs.google.com/spreadsheets/d/ and before /edit. That&#8217;s the sheet ID. </p>
+
+<h3>Step 6: Set up the code for your Google Spreadsheet to integrate with your GitHub repository</h3>
+<br />
+<p>So here&#8217;s one of the things I love about GitHub and why I use it for all my projects. You can really easily copy files from another project into your new project, so you don&#8217;t need to write anything from scratch. You mostly need to edit a few lines in various files. And because the files on GitHub are openly available, you can also download or fork repositories.</p>
+
+<p>Copy all the files from one of my data projects &#8211; there&#8217;s a long list at <a href="http://github.com/hack-education-data">Hack Education Data</a> &#8211; into the local folder that contains your project. Don&#8217;t worry. Nothing will change on GitHub until you sync what&#8217;s stored locally with what&#8217;s stored on GitHub. And you can always revert back to earlier changes. (Another huge benefit.)</p>
+
+<p>Here I&#8217;ve copied all the files from my work on the Chan Zuckerberg Initiative because the data structure for the project is almost identical. In that project too, I had two tabs in my Google Spreadsheet &#8211; one for people and one for investments. If your tabs have different names, you&#8217;ll need to rename the files inside the _data folder.</p>
+
+<p><img src="https://s3.amazonaws.com/hackedu/2017-07-28-howto12.png"></p>
+
+<p>Open up all the files in the folder in your text editor. Mostly, you&#8217;re just going to have to make a bunch of small changes to each file &#8211; changing headers, in my case, from Chan Zuckerberg Initiative to Emerson Collective.</p>
+
+<p><img src="https://s3.amazonaws.com/hackedu/2017-07-28-howto13.png"></p>
+
+<p>There&#8217;s a lot more explanation required to explain how Liquid works. That's the code you see in the image below.</p>
+
+<p><img src="https://s3.amazonaws.com/hackedu/2017-07-28-howto14.png"></p>
+
+<p>This is the markup language that&#8217;s used to build sites using the data in the _data folder. But I think you can see a bit of the logic here. The variable &#8220;investments&#8221; draws on the data in the site.data.investments file. The data is going to be sorted by &#8220;Name.&#8221; (Note: &#8220;Name&#8221; is capitalized in that column in my Google Spreadsheet.) And for each record &#8211; &#8220;investment&#8221; &#8211; display on the page the investment.Name, Investment.Date, and Investment.Amount. (Also note: these are also capitalized.) These are displayed as a list, but you can change the HTML to suit your needs.</p>
+
+<p>You'll need to change data in the _config.yml file.</p>
+
+<p><img src="https://s3.amazonaws.com/hackedu/2017-07-28-howto15.png"></p>
+
+<p>You&#8217;ll need to add the sheet ID from your Google Spreadsheet. (Remember that? You wrote it down, right?) That&#8217;s the integration_spreadsheet_key. Make sure your GitHub user name and the name of the repo are correct too.</p>
+
+<h3>Step 7: Sync your data with GitHub</h3>
+<br />
+<p><img src="https://s3.amazonaws.com/hackedu/2017-07-28-howto16.png"></p>
+
+<p>This step takes your local files and pushes them to your repository on GitHub.</p>
+
+<p>If you get errors at this point (that is, if you get an email from GitHub telling you your page won't build), there&#8217;s probably something wrong with the Liquid. That&#8217;s where I&#8217;d start the troubleshooting.</p>
+
+<h3>Step 8: Create a personal access token</h3>
+<br />
+<p>You&#8217;re going to need to create a personal access token on GitHub because you&#8217;re going to pass a command for Git (that is, to update your GitHub repository with the Google Spreadsheet data) over HTTPS.</p>
+
+<p>You&#8217;ll find this option on the left hand side of the Settings page if you go to your GitHub profile.</p>
+
+<p><img src="https://s3.amazonaws.com/hackedu/2017-07-28-howto17.png"></p>
+
+<p>Give the token a description and define the scope of how it will work.</p>
+
+<p><img src="https://s3.amazonaws.com/hackedu/2017-07-28-howto18.png"></p>
+
+<p><strong>Keep this token a secret</strong>. Do not include it in your code anywhere that you post publicly. (That is, don&#8217;t include it in a GitHub repository.)</p>
+
+<h3>Step 9: Integrate your spreadsheet data</h3>
+<br />
+<p>Updating your GitHub repository with your spreadsheet data is going to happen via a URL. Obviously, update the URL below with the correct data.</p>
+
+<p>https://[your GitHub name].github.io/[the name of your repository]/pull-spreadsheet/?key=[spreadsheet ID]&amp;worksheet=[name of the worksheet]&amp;token=[your GitHub personal access token]&amp;org=[your GitHub name]&amp;repo=[the name of the repository]&amp;branch=master</p>
+
+<p>I always open the browser console to make sure the code has run correctly.</p>
+
+<p><img src="https://s3.amazonaws.com/hackedu/2017-07-28-howto19.png"></p>
+
+<p>You can double-check and make sure the YAML file has been updated successfully. Ideally if there are errors, the console will help you troubleshoot them. (I have found that sometimes characters like accents throw errors at this stage.)</p>
+
+<p>The repository on GitHub will now be updated with the new spreadsheet data. You will need to sync the repo locally to update the files on your machine.</p>
+
+<p>The URL for your project will be [your GitHub username].github.io/[repo name]. In my case, this project is available at <a href="https://hack-education-data.github.io/emerson-collective/https://hack-education-data.github.io/emerson-collective/">hack-education-data.github.io/emerson-collective</a>.</p>
+
+<p><img src="https://s3.amazonaws.com/hackedu/2017-07-28-howto20.png"></p>
